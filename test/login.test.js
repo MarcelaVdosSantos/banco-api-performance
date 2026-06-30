@@ -3,8 +3,19 @@ import { sleep, check } from 'k6';
 
 export const options = {
     //iterations: 40,
-    vus: 10, //usuários virtuais
-    duration: '30s',
+
+    //vus: 10, //usuários virtuais
+    //duration: '30s',
+
+    stages: [
+      { duration: '10s', target: 10 },  // durante 10 segundos coloque 10 usuários virtuais para executar os testes
+      { duration: '20s', target: 10 },
+      { duration: '10s', target: 30 },
+      { duration: '20s', target: 30 },
+      { duration: '20s', target: 0 }
+    ],
+
+
     thresholds: { // irá validar o teste
       http_req_duration: [ 'p(90)<4000', 'max<6000' ],
       http_req_failed: ['rate<0.01' ]
