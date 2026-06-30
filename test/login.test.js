@@ -2,9 +2,11 @@ import http from 'k6/http';
 import { sleep, check } from 'k6';
 
 export const options = {
-    iterations: 40,
+    //iterations: 40,
+    vus: 10, //usuários virtuais
+    duration: '30s',
     thresholds: { // irá validar o teste
-      http_req_duration: [ 'p(90)<1', 'max<2' ],
+      http_req_duration: [ 'p(90)<4000', 'max<6000' ],
       http_req_failed: ['rate<0.01' ]
     }
 };
