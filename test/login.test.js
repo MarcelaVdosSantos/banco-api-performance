@@ -1,5 +1,6 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
+const postLogin =  JSON.parse(open('../fixtures/postLogin.json'))
 
 export const options = {
     //iterations: 40,
@@ -26,10 +27,12 @@ export default function () {
 // aqui fica o teste
   const url = 'http://localhost:3000/login';
 
-  const payload = JSON.stringify({
-    username: 'julio.lima',
-    senha: '123456',
-  });
+  // vc pode manipular o json caso queira alterar o user para um único usuário
+  //postLogin.username = "junior.lima"
+  //postLogin.senha ="123456"
+
+  //console.log.(postLogin)
+  const payload = JSON.stringify(postLogin);
 
   const params = {
     headers: {
