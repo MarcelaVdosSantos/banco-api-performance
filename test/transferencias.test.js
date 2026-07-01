@@ -7,7 +7,7 @@ export const options = {
 };
 
 export default function() {
-  const token = obterToken()
+  const token = obterToken() // reaproveitamento do token
 
   const url = 'http://localhost:3000/transferencias';
 
@@ -25,7 +25,7 @@ export default function() {
     },
   };
 
-  let res = http.post(url, payload, params);
+   let res = http.post(url, payload, params);
 
   check(res, { 
     "status is 201": (res) => res.status === 201

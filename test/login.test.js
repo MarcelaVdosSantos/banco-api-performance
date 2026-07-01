@@ -5,16 +5,16 @@ const postLogin =  JSON.parse(open('../fixtures/postLogin.json'))
 export const options = {
     //iterations: 40,
 
-    //vus: 10, //usuários virtuais
-    //duration: '30s',
+    vus: 1, //usuários virtuais
+    duration: '30s',
 
-    stages: [
+    /*stages: [
       { duration: '10s', target: 10 },  // durante 10 segundos coloque 10 usuários virtuais para executar os testes
       { duration: '20s', target: 10 },
       { duration: '10s', target: 30 },
       { duration: '20s', target: 30 },
       { duration: '20s', target: 0 }
-    ],
+    ],*/
 
 
     thresholds: { // irá validar o teste
@@ -31,7 +31,7 @@ export default function () {
   //postLogin.username = "junior.lima"
   //postLogin.senha ="123456"
 
-  //console.log.(postLogin)
+  //console.log(postLogin)
   const payload = JSON.stringify(postLogin);
 
   const params = {
