@@ -1,20 +1,19 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
+import { pegarBaseURL } from '../utils/variaveis.js';
 const postLogin =  JSON.parse(open('../fixtures/postLogin.json'))
 
 export const options = {
     //iterations: 40,
 
-    vus: 1, //usuários virtuais
-    duration: '30s',
+    //vus: 1, //usuários virtuais
+    //duration: '30s',
 
-    /*stages: [
-      { duration: '10s', target: 10 },  // durante 10 segundos coloque 10 usuários virtuais para executar os testes
+    stages: [
+      { duration: '5s', target: 10 },  // durante 10 segundos coloque 10 usuários virtuais para executar os testes
       { duration: '20s', target: 10 },
-      { duration: '10s', target: 30 },
-      { duration: '20s', target: 30 },
-      { duration: '20s', target: 0 }
-    ],*/
+      { duration: '5s', target: 0 }
+    ],
 
 
     thresholds: { // irá validar o teste
@@ -25,7 +24,7 @@ export const options = {
 
 export default function () {
 // aqui fica o teste
-  const url = 'http://localhost:3000/login';
+  const url = pegarBaseURL() + '/login';
 
   // vc pode manipular o json caso queira alterar o user para um único usuário
   //postLogin.username = "junior.lima"
@@ -43,7 +42,7 @@ export default function () {
   const resposta = http.post(url, payload, params);
 
   check(resposta, { // o r referencia/representa o resposta, o check apenas verifica que a API esta UP
-    'Validar que o Status é 200' : (r) => r.status ===200,
+    'Validar que o Status é 200' : (r) => r.status ===201,
     'Validar que o token é string' : (r) => typeof(r.json().token) == 'string'
   })
 
